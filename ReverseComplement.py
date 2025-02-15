@@ -15,14 +15,14 @@ def complement_dna(dna_strand):
 def reverse_string_slicing(cdna_to_reverse):
     return cdna_to_reverse[::-1]
 
-def reverse_complement_dna(rcDNA):
-    return complement_dna (reverse_string_slicing(rcDNA))
+def reverse_complement_dna(rcdna):
+    return complement_dna (reverse_string_slicing(rcdna))
 
+def print_rcdna(rcdna):
+    result = reverse_complement_dna(rcdna)
+    print("your reversed cDNA strand is:", result)
 #Example
 query_dna = "ATGCatgc"
-result = reverse_complement_dna(query_dna)
-print("your reversed cDNA strand is:", result)
-
-#Example
+print_rcdna(query_dna)
 query_dna = "FTTTTTTT"
-print("your reversed cDNA strand is:",reverse_complement_dna(query_dna))
+print_rcdna(query_dna)
