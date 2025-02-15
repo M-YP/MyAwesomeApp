@@ -21,8 +21,10 @@ def reverse_complement_dna(rcdna):
 def print_rcdna(rcdna):
     result = reverse_complement_dna(rcdna)
     print("your reversed cDNA strand is:", result)
-#Example
-query_dna = "ATGCatgc"
+
+def input_strand():
+    return input("Enter your DNA strand: ")
+
+query_dna = input_strand()
 print_rcdna(query_dna)
-query_dna = "FTTTTTTT"
-print_rcdna(query_dna)
+
