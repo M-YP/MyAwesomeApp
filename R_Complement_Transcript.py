@@ -1,15 +1,21 @@
-def complement_seq(strand):
-    base_code = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}
-    for codon in strand:
-        if codon not in base_code:
-            return "Error: Input must include letters a, t/u, g, c only."
-        if (seq == "d") and ("U" or "u" in strand):
-            return "Error: DNA strand cannot contain U/u."
-        if (seq == "r") and ("T" or "t" in strand):
-            return "Error: RNA strand cannot contain T/t."
+def seq_type():
+    return input("what is your sequence type (d for DNA - r for RNA)")
 
-    complement = ""
-    complement_codon = {
+
+def input_seq(strand):
+    return input("Enter your sequence: ")
+
+
+def enquiry_type():
+    return input(
+        "what is your enquiry (c for complement - t for transcript - r for reverse - n for reverse complement)"
+    )
+
+
+# reversed complement of a strand equals to its negative strand hence n was selected.
+if enquiry_type() == "n" or "t" or "n":
+    complement_transcript = ""
+    codon_dict: dict[str, str] = {
         "A": "T",
         "T": "A",
         "C": "G",
@@ -19,6 +25,18 @@ def complement_seq(strand):
         "c": "g",
         "g": "c",
     }
+
+
+def complement_seq(strand):
+    base_code = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}
+    for codon in strand:
+        if codon not in base_code:
+            return "Error: Input must include letters a, t/u, g, c only."
+        if (seq_type() == "d") and ("U" or "u" in strand):
+            return "Error: DNA strand cannot contain U/u."
+        if (seq_type() == "r") and ("T" or "t" in strand):
+            return "Error: RNA strand cannot contain T/t."
+
     if input == "r":
         complement_codon["U"] = "A"
         complement_codon["u"] = "a"
@@ -30,27 +48,19 @@ def complement_seq(strand):
     return complement
 
 
-def reverse_string_slicing(cseq_to_reverse):
-    return cseq_to_reverse[::-1]
+def reverse_string_slicing(seq_to_reverse):
+    return seq_to_reverse[::-1]
 
 
-def reverse_complement_dna(rcseq):
-    return complement_seq(reverse_string_slicing(rcseq))
+def reverse_complement_dna(sequence):
+    return complement_seq(reverse_string_slicing(sequence))
 
 
-def print_rcdna(rcseq):
-    result = reverse_complement_dna(rcseq)
+def reversed_complement(dna_strand):
+    result = reverse_complement_dna(dna_strand)
     print("your reversed cDNA strand is:", result)
 
 
-def seq():
-    return input("what is your sequence type (d for DNA - r for RNA)")
-
-
-def input_seq():
-    return input("Enter your sequence: ")
-
-
-seq_type = seq()
+seq_type = seq_type()
 query_seq = input_seq()
-print_rcdna(query_seq)
+reversed_complement(query_seq)
