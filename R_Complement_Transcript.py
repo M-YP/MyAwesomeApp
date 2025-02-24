@@ -1,3 +1,5 @@
+#! /home/maryam/miniconda3/envs/MyAwesomeApp/bin/python     #this command helps executing the program with ./
+
 def enq():
     return input("what is your sequence type (d for DNA - r for RNA)")
 
