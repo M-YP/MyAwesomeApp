@@ -1,45 +1,41 @@
-#! /home/maryam/miniconda3/envs/MyAwesomeApp/bin/python     #this command helps executing the program with ./
+#! /home/maryam/miniconda3/envs/MyAwesomeApp/bin/python     #shebang command executes the program with ./
 
-def enq():
+def seq_type():  # takes the type of nucleic acid sequence
     return input("what is your sequence type (d for DNA - r for RNA)")
 
-def input_seq(strand):
+
+def input_seq():  #takes the sequence
     return input("Enter your sequence: ")
 
-def enquiry_type():
-    return input(
-        "what is your enquiry (c for complement - t for transcript - r for reverse - n for reverse complement)")
+
+def enq_type():  # takes the required process to be performed on the sequence
+    print("what is your enquiry (r for reverse - c for complement - t for transcript - n for reverse complement)")
+    return input()
 # reversed complement of a strand equals to its negative strand hence n was selected.
 
-def results():
-    complement_transcript = ""
-    codon_dict: dict[str, str] = {
-        "A": "T",
-        "T": "A",
-        "C": "G",
-        "G": "C",
-        "a": "t",
-        "t": "a",
-        "c": "g",
-        "g": "c",
-    }
-    if enquiry_type() in ["c", "n", "t"]:
-        def complement_seq(strand):
-            base_code = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}
-            for single_base in strand:
-                if single_base not in base_code:
-                    return "Error: Input must include letters a, t/u, g, c only."
-                if (enq() == "d") and ("U" or "u" in strand):
-                    return "Error: DNA strand cannot contain U/u."
-                if (enq() == "r") and ("T" or "t" in strand):
-                    return "Error: RNA strand cannot contain T/t."
+codon = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}
 
+if enq_type() not in ["c", "t", "r", "n"]:
+    print(
+        "Error: Enquiry must be one of 'r' for reverse, 'c' for complement, 't' for transcript, or 'n' for reverse complement")
+else:
+    def input_seq(strand):
+        for base in strand:
+            if base not in codon:
+                return "Error: Your sequence can only include letters a, t/u, g, c only."
+            if (seq_type() == "d") and ("U" or "u" in strand):
+                return "Error: DNA strand cannot contain Uracil."
+            if (seq_type() == "r") and ("T" or "t" in strand):
+                return "Error: RNA strand cannot contain Thymine."
+            else:
+                def results():
+                    if seq_type() == "d":
+                        codon_dict = {"A": "T", "T": "A", "G": "C", "C": "G", "a": "t", "t": "a", "g": "c", "c": "g"}
+                        return codon_dict[base]
+                    elif seq_type() == "r":
+                        codon_dict = {"A": "U", "U": "A", "G": "C", "C": "G", "a": "u", "u": "a", "g": "c", "c": "g"}
+                        return codon_dict[base]
 
-    if input == "r":
-        complement_codon["U"] = "A"
-        complement_codon["u"] = "a"
-        complement_codon["A"] = "U"
-        complement_codon["a"] = "u"
 
     for base in strand:
         complement += complement_codon[base]
@@ -51,7 +47,7 @@ def reverse_string_slicing(seq_to_reverse):
 
 
 def reverse_complement_dna(sequence):
-    return complement_seq(reverse_string_slicing(sequence))
+    return input_seq(reverse_string_slicing(sequence))
 
 
 def reversed_complement(dna_strand):
