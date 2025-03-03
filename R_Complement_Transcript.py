@@ -1,4 +1,5 @@
-#! /home/maryam/miniconda3/envs/MyAwesomeApp/bin/python     #shebang command executes the program with ./
+#!/usr/bin/env python3
+# shebang command executes the program with ./
 
 def seq_type():  # takes the type of nucleic acid sequence
     return input("what is your sequence type (d for DNA - r for RNA)")
