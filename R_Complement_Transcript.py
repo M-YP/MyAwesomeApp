@@ -55,7 +55,11 @@ def negative_strand(strand):  # returns the reversed sequence of complement/tran
 
 
 def process_seq(strand):  # processes input strand based on the type of enquiry
-    if seq_validation(strand) is None:
+    seq_type()
+    # step 1
+    strand = input_seq()
+    # step 2
+    if seq_validation(strand) is None:  # step 3
         if enq_type() == "r":
             return reverse_strand(strand)
         elif enq_type() == "c":
