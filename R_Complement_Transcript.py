@@ -2,12 +2,12 @@
 # shebang command executes the program with ./
 
 def seq_type():  # takes the type of nucleic acid sequence
-    return input("what is your sequence type (d for DNA - r for RNA)")
-
+    print("what is your sequence type (d for DNA - r for RNA)")
+    return input()
 
 def input_seq():  #takes the sequence
-    return input("Enter your sequence: ")
-
+    print("Enter your sequence: ")
+    return input()
 
 def enq_type():  #takes the required process to be performed on the sequence
     print("what is your enquiry (r for reverse - c for complement - t for transcript - n for reverse complement)")
