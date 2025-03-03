@@ -14,14 +14,13 @@ def enq_type():  #takes the required process to be performed on the sequence
     return input()
 # reversed complement of a strand equals to its negative strand hence n was selected.
 
-codon = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}  #shows the eligible codons in the input sequence
-
-if enq_type() not in ["c", "t", "r", "n"]:  #validates the enquired process
-    print(
-        "Error: Enquiry must be one of 'r' for reverse, 'c' for complement, 't' for transcript, or 'n' for reverse complement")
-
+def enq_validation():
+    if enq_type() not in ["c", "t", "r", "n"]:  # validates the enquired process
+        print(
+            "Error: Enquiry must be one of 'r' for reverse, 'c' for complement, 't' for transcript, or 'n' for reverse complement")
 
 def seq_validation(strand):  # validates the input sequence for the eligible codons in DNA and/or RNA
+    codon = {"A", "T", "G", "C", "U", "a", "t", "g", "c", "u"}  # shows the eligible codons in the input sequence
     for base in strand:
         if base not in codon:
             return "Error: Your sequence can only include letters a, t/u, g, c only."
@@ -29,7 +28,6 @@ def seq_validation(strand):  # validates the input sequence for the eligible cod
             return "Error: DNA strand cannot contain Uracil."
         if (seq_type() == "r") and ("T" or "t" in strand):
             return "Error: RNA strand cannot contain Thymine."
-
 
 def base_dictionary(base):  # defines the correct counterpart codons
     if seq_type() == "d" and enq_type() == "c":
@@ -39,27 +37,20 @@ def base_dictionary(base):  # defines the correct counterpart codons
         codon_dict = {"A": "U", "U": "A", "G": "C", "C": "G", "a": "u", "u": "a", "g": "c", "c": "g"}
         return codon_dict[base]
 
-
 def comp_trans(strand):  #returns the complement/translated sequence of the input strand
     for base in strand:
         strand += base_dictionary(base)
     return strand
 
-
 def reverse_strand(strand):  # returns the reversed sequence of the input strand
     return strand[::-1]
-
 
 def negative_strand(strand):  # returns the reversed sequence of complement/translated sequence
     return reverse_strand(comp_trans(strand))
 
-
 def process_seq(strand):  # processes input strand based on the type of enquiry
-    seq_type()
-    # step 1
-    strand = input_seq()
-    # step 2
-    if seq_validation(strand) is None:  # step 3
+
+    if seq_validation(strand) is None:
         if enq_type() == "r":
             return reverse_strand(strand)
         elif enq_type() == "c":
@@ -68,3 +59,9 @@ def process_seq(strand):  # processes input strand based on the type of enquiry
             return comp_trans(strand)
         elif enq_type() == "n":
             return negative_strand(strand)
+
+
+def main():
+    enq_validation()
+    strand = input_seq()
+    print(process_seq(strand))
